@@ -1,0 +1,21 @@
+.Time {
+  display:flex;
+  justify-content:right;
+  align-items:flex-end;
+  margin-bottom:3px;
+  font-size:12px;
+  font-weight:300;
+}
+.icon {
+  width:12px;
+  height:12px;
+  margin-right:2px;
+}
+.Time p {
+  line-height:15px;
+}
+.snow {
+  color:var(--rich_b);
+  opacity:0.9;
+  font-weight:400;
+}

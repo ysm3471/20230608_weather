@@ -1,0 +1,9 @@
+.Footer {
+  position:fixed;
+  bottom:2%;
+  right:3%;
+}
+.icon {
+  width:30px;
+  height:30px;
+}
