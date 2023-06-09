@@ -3,9 +3,9 @@ import classes from './TempNow.module.css';
 import { WeatherContext } from '../../Store/WeatherProvider';
 
 export default function TempNow() {
-  // const {info} = useContext(WeatherContext);
+  const {info} = useContext(WeatherContext);
 
-/*   const today = new Date();
+  const today = new Date();
   let now = today.getHours();
 
   if(now <10) {
@@ -15,13 +15,13 @@ export default function TempNow() {
     now = now + "00"
   }
 
-  const tempNow = info.items.item.find((aa) => {
+  const tempNow = info[1].find((aa) => {
     return aa.category === "TMP" && aa.fcstTime === now
-  }) */
+  })
 
   return (
     <div className={classes.TempNow}>
-      <p>{/* {tempNow.fcstValue}° */}</p>
+      <p>{tempNow.fcstValue}°</p>
     </div>
   )
 }

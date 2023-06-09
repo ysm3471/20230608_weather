@@ -10,3 +10,6 @@
 8. 시간 남으면 지도 api 적용해보기
 9. 전부 연동
 
+
+forcastlist rainchecks가 하나 덜 찍힘 왜???
+

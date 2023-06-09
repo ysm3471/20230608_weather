@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import classes from './RainCheck.module.css';
 import { WeatherContext } from '../../Store/WeatherProvider';
 
-export default function RainCheck() {
-  const {weather,bgToggle} = useContext(WeatherContext)
+export default function RainCheck({weather}) {
+  const {bgToggle} = useContext(WeatherContext)
   let todayWeather;
   let todayColor;
   

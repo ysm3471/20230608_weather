@@ -4,11 +4,11 @@ import RainCheck from './RainCheck';
 import TempNow from './TempNow';
 import TempHighLow from './TempHighLow';
 
-export default function MainHeader() {
+export default function MainHeader({weather}) {
   return (
     <div className={classes.MainHeader}>
       <TempNow/>
-      <RainCheck/>
+      <RainCheck weather={weather}/>
       <TempHighLow/>
     </div>
   )

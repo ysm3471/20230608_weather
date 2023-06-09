@@ -13,6 +13,7 @@ export default function WeatherProvider({ children }) {
   const [on, setOn] = useState(false);
   const [ready,getReady] = useState(false);
   const [number, setNumber] = useState(1);
+  const [howPer,setHowPer] = useState(50);
 
 
   useEffect(() => {
@@ -94,7 +95,7 @@ export default function WeatherProvider({ children }) {
 
   return (
     <>
-      {ready && <WeatherContext.Provider value={{ weather, changeWeather, bgToggle, bgToggleBtn, settingToggle, settingToggleBtn, info, state,TMN,TMX,rain}}>
+      {ready && <WeatherContext.Provider value={{ weather, changeWeather, bgToggle, bgToggleBtn, settingToggle, settingToggleBtn, info, state,TMN,TMX,rain,todayDate,howPer,setHowPer}}>
         {children}
       </WeatherContext.Provider>}
     </>
