@@ -4,13 +4,13 @@ import TopHeader from './TopHeader/TopHeader';
 import MainHeader from './MainHeader/MainHeader';
 import { WeatherContext } from '../Store/WeatherProvider';
 
-export default function Header({weather}) {
+export default function Header({weather,isRainy}) {
   const {bgToggle} = useContext(WeatherContext)
 
   return (
     <header className={classes.Header} style={bgToggle ? undefined : {color:'var(--deep_b)'}}>
-      <TopHeader/>
-      <MainHeader weather={weather}/>
+      <TopHeader weather={weather}/>
+      <MainHeader weather={weather} isRainy={isRainy}/>
     </header>
   )
 }

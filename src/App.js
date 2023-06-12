@@ -9,21 +9,19 @@ import { WeatherContext } from './components/Store/WeatherProvider';
 
 
 function App() {
-  const { bgToggle, info, state, TMN, TMX, rain } = useContext(WeatherContext);
+  const { bgToggle, info, state, TMN, TMX, rain ,howPer } = useContext(WeatherContext);
 
+  const today = new Date();
+  const now = today.getHours();
 
   let weather = "normal"
-  const isRainy = rain[1].find((aa) => Number(aa.fcstValue) >= 50)    // 금일 pop의 fcstvalue가 50이상일 경우
+  const isRainy = rain[1].find((aa) => Number(aa.fcstValue) >= Number(howPer) && Number(aa.fcstTime) >= Number(now)*100)    // 금일 pop의 fcstvalue가 50이상일 경우
 
-  if (isRainy) {    // 50이상이면서 형태가 눈일경우
-    const how = info[0].find((aa) => aa.fcstTime === isRainy.fcstTime && aa.category === "PTY")
+  if (isRainy) {   
+    const how = info[1].find((aa) => aa.fcstTime === isRainy.fcstTime && aa.category === "PTY")
     if (how.fcstValue === "3") weather = "snow"
     else weather = "rainy"
   }
-
-  console.log(info,state)
-
-
 
   let bgUrl = "img/normal.png";
 
@@ -45,7 +43,7 @@ function App() {
     <>
       <AppSetting />
       <div className={'container'} style={bgToggle ? { backgroundImage: `url(${bgUrl})` } : undefined} >
-        <Header TMN={TMN} weather={weather} />
+        <Header TMN={TMN} weather={weather} isRainy={isRainy} />
         <main>
           <TodayWeather />
           <NextWeather />

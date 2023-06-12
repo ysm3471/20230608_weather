@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useRef } from 'react';
 import DateInfo from './DateInfo';
 import GetInfo from './GetInfo';
+import Loading from './Loading';
 
 export const WeatherContext = createContext();
 
@@ -11,24 +12,24 @@ export default function WeatherProvider({ children }) {
   const [info, setInfo] = useState({});
   const [state, setState] = useState({});
   const [on, setOn] = useState(false);
-  const [ready,getReady] = useState(false);
+  const [ready, getReady] = useState(false);
   const [number, setNumber] = useState(1);
-  const [howPer,setHowPer] = useState(50);
+  const [howPer, setHowPer] = useState(50);
 
 
   useEffect(() => {
     setOn(false)
-      GetInfo(todayDate, number)
-        .then(res => {
-          if(number<4){
-            setInfo({...info,[number]:res.response.body.items.item});
-            setState({...info,[number]:res.response.header});
-            setNumber(num => num +1 )            
-          }
-          else {
-            setOn(true);
-          }
-        })      
+    GetInfo(todayDate, number)
+      .then(res => {
+        if (number < 4) {
+          setInfo({ ...info, [number]: res.response.body.items.item });
+          setState({ ...info, [number]: res.response.header });
+          setNumber(num => num + 1)
+        }
+        else {
+          setOn(true);
+        }
+      })
   }, [number])
 
   let changeDate = useRef(new Date());
@@ -39,14 +40,28 @@ export default function WeatherProvider({ children }) {
   const [TMX, setTMX] = useState({});
   const [rain, setRain] = useState({});
 
+  let rainList = useRef([]);
+
 
   useEffect(() => {
     getReady(false)
-    if(on) {
+    if (on) {
       let TMNres = info[page].find((aa) => { return aa.fcstDate === date.current && aa.category === "TMN" })
       let TMXres = info[page].find((aa) => { return aa.fcstDate === date.current && aa.category === "TMX" })
       let rainres = info[page].filter((aa) => { return aa.fcstDate === date.current && aa.category === "POP" })
-      setRain({ ...rain, [num]: rainres })
+
+      if (rainres[rainres.length - 1].fcstTime === "2300") {    // 찾은 결과의 마지막요소가 fcstTime이 23시일경우
+        for (let key in rainres) {    // 임시 저장소에 병합 후 저장함
+          rainList.current.push(rainres[key])
+        }
+        setRain({ ...rain, [num]: rainList.current })
+        rainList.current = [];    // 임시 저장소 초기화
+      }
+      else {    // 23시가 아닐경우
+        for (let key in rainres) {
+          rainList.current.push(rainres[key])   // 임시저장소에 저장함
+        }
+      }
 
 
       switch (false) {
@@ -75,13 +90,13 @@ export default function WeatherProvider({ children }) {
             setPage(num => num + 1);
           }
           break;
-      }      
+      }
     }
   }, [num, page, on])
 
   const [bgToggle, setbgToggle] = useState(true);
   const [settingToggle, setSettingToggle] = useState(false);
-  const [weather, setWeather] = useState("normal");
+  const [changeWeather, setChangeWeather] = useState("default");
 
   function bgToggleBtn() {
     setbgToggle((show) => !show)
@@ -89,13 +104,14 @@ export default function WeatherProvider({ children }) {
   function settingToggleBtn() {
     setSettingToggle((show) => !show)
   }
-  function changeWeather(item) {
-    setWeather(item);
+  function refreshBtn() {
+    setNumber(1);
   }
 
   return (
     <>
-      {ready && <WeatherContext.Provider value={{ weather, changeWeather, bgToggle, bgToggleBtn, settingToggle, settingToggleBtn, info, state,TMN,TMX,rain,todayDate,howPer,setHowPer}}>
+      {!(ready) && <Loading/> }
+      {ready && <WeatherContext.Provider value={{ changeWeather, setChangeWeather, bgToggle, bgToggleBtn, settingToggle, settingToggleBtn,setInfo, info, state, TMN, TMX, rain, setRain, todayDate, howPer, setHowPer,refreshBtn }}>
         {children}
       </WeatherContext.Provider>}
     </>

@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import classes from './Local.module.css';
 import { WeatherContext } from '../../Store/WeatherProvider';
 
-export default function Local() {
-  const {weather,bgToggle} = useContext(WeatherContext)
+export default function Local({weather}) {
+  const {bgToggle} = useContext(WeatherContext)
   let local;
 
   if (weather === 'snow' || !bgToggle) {

@@ -2,10 +2,15 @@ import React, { useContext } from 'react';
 import classes from './RainCheck.module.css';
 import { WeatherContext } from '../../Store/WeatherProvider';
 
-export default function RainCheck({weather}) {
+export default function RainCheck({weather,isRainy}) {
   const {bgToggle} = useContext(WeatherContext)
   let todayWeather;
   let todayColor;
+
+  let rainyTime;
+  if (isRainy) {
+    rainyTime = isRainy.fcstTime.replace(/0/g,'')   // 문자열에서 0을 제거하는 정규표현식
+  }
   
   switch (weather) {
     case "normal":
@@ -35,7 +40,7 @@ export default function RainCheck({weather}) {
   else {
     rainCheck = (
       <div className={`${classes.RainCheck} ${todayColor}`}>
-        <span>지금</span>
+        <span>{rainyTime}시</span>
         부터
         <b> {todayWeather}</b>
       </div>        
