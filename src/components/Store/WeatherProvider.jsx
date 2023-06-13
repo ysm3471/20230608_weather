@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, useRef } from 'react';
 import DateInfo from './DateInfo';
 import GetInfo from './GetInfo';
 import Loading from './Loading';
+import LocationConverter from './LocationConverter';
 
 export const WeatherContext = createContext();
 
@@ -19,7 +20,7 @@ export default function WeatherProvider({ children }) {
 
   useEffect(() => {
     setOn(false)
-    GetInfo(todayDate, number)
+    GetInfo(todayDate, number,convertLoaction.x,convertLoaction.y)
       .then(res => {
         if (number < 4) {
           setInfo({ ...info, [number]: res.response.body.items.item });
@@ -94,9 +95,24 @@ export default function WeatherProvider({ children }) {
     }
   }, [num, page, on])
 
+
+
   const [bgToggle, setbgToggle] = useState(true);
   const [settingToggle, setSettingToggle] = useState(false);
   const [changeWeather, setChangeWeather] = useState("default");
+  const [userAddress, setUserAddress] = useState(false);    // 유저의 주소
+  const [userLocation, setUserLoaction] = useState(null);   // 유저의 좌표값
+  const [convertLoaction,setConvertLocation] = useState({
+    x:60,
+    y:127
+  });    // 유저의 변환된 좌표값
+
+  useEffect(() => {
+    if (userLocation) {
+      const loaction = LocationConverter("toXY", userLocation.Ma, userLocation.La)
+      setConvertLocation(loaction);
+    }
+  }, [userLocation])  
 
   function bgToggleBtn() {
     setbgToggle((show) => !show)
@@ -110,8 +126,32 @@ export default function WeatherProvider({ children }) {
 
   return (
     <>
-      {!(ready) && <Loading/> }
-      {ready && <WeatherContext.Provider value={{ changeWeather, setChangeWeather, bgToggle, bgToggleBtn, settingToggle, settingToggleBtn,setInfo, info, state, TMN, TMX, rain, setRain, todayDate, howPer, setHowPer,refreshBtn }}>
+      {!(ready) && <Loading />}
+      {ready && <WeatherContext.Provider
+        value={{
+          changeWeather,
+          setChangeWeather,
+          bgToggle,
+          bgToggleBtn,
+          settingToggle,
+          settingToggleBtn,
+          setInfo,
+          info,
+          state,
+          TMN,
+          TMX,
+          rain,
+          setRain,
+          todayDate,
+          howPer,
+          setHowPer,
+          refreshBtn,
+          userAddress,
+          setUserAddress,
+          userLocation,
+          setUserLoaction,
+          convertLoaction
+        }}>
         {children}
       </WeatherContext.Provider>}
     </>

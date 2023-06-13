@@ -18,9 +18,7 @@ export default function ForecastList({ date, TMN, TMX, rain }) {
   const night = nightRain.find((aa) => aa.fcstValue >= howPer)
   let dayWeather = useRef('normal')
   let nightWeather = useRef('normal')
-
   
-
   useEffect(() => {
     if (day) {
       let dayHow = info[page].find((aa) => aa.fcstTime === day.fcstTime & aa.category === "PTY");

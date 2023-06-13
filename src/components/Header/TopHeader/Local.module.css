@@ -8,6 +8,7 @@
 .Local p {
   line-height:14px;
   margin-bottom:1px;
+  margin-right:3px
 }
 .gps {
   width:10px;
@@ -16,6 +17,7 @@
 .edit {
   width:12px;
   height:12px;
+  cursor: pointer;
 }
 .snow {
   color:var(--rich_b);

@@ -62,11 +62,18 @@ const IOSSwitch = styled((props) => {
 }));
 
 export default function SwitchBtn() {
+  const {bgToggle} = useContext(WeatherContext);
   return (
     <FormGroup>
+      {
+        bgToggle ? <FormControlLabel
+        control={<IOSSwitch defaultChecked />}
+      /> :
       <FormControlLabel
-        control={<IOSSwitch defaultChecked/>}
+        control={<IOSSwitch/>}
       />
+      } 
+      {/* bgToggle의 상태에 따라 switch버튼을 조절 */}
     </FormGroup>
   )
 }
