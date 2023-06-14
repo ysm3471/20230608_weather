@@ -90,6 +90,7 @@ export default function KaKaoMap({mapToggleBtn,userEditing}) {
             infowindow.close();
           });
           kakao.maps.event.addListener(marker, 'click', function () {
+            console.log(user_position);
             setUserAddress(user_address);
             setUserLoaction(user_position);
             mapToggleBtn();
@@ -127,6 +128,13 @@ export default function KaKaoMap({mapToggleBtn,userEditing}) {
 
       el.innerHTML = itemStr;
       el.className = 'item';
+
+      el.addEventListener('click',function(){
+        setUserAddress(places.address_name);
+        setUserLoaction({La:places.x,Ma:places.y});
+        mapToggleBtn();
+      })
+      
 
       return el;
     }

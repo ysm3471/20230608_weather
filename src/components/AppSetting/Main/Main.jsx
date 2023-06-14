@@ -5,10 +5,10 @@ import RainCheck from './RainCheck/RainCheck';
 import DevControl from './DevControl/DevControl';
 import classes from './Main.module.css';
 
-export default function Main({mapToggleBtn,mapToggle,userEditing,editing}) {
+export default function Main({mapToggleBtn,userEditing,editing}) {
   return (
     <main className={classes.main}>
-      <LocalEdit mapToggle={mapToggle} mapToggleBtn={mapToggleBtn} editing={editing} userEditing={userEditing}/>
+      <LocalEdit mapToggleBtn={mapToggleBtn} editing={editing} userEditing={userEditing}/>
       <BgControl/>
       <RainCheck/>
       <DevControl/>

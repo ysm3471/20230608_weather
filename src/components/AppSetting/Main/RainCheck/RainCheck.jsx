@@ -10,9 +10,9 @@ export default function RainCheck() {
     <div>
       <Title title={"강수표기 설정"}/>
       <div className={classes.RainCheck}>
-        <label htmlFor="Rain_per"><p>표시할 강수확률</p></label>
+        <p>표시할 강수확률</p>
         <div>
-          <select id="" defaultValue={"50"} onChange={(e) => {setHowPer(e.target.value);}}>
+          <select defaultValue={"50"} onChange={(e) => {setHowPer(e.target.value);}}>
             <option value="0">0%</option>
             <option value="10">10%</option>
             <option value="20">20%</option>

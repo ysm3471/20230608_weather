@@ -69,7 +69,7 @@ export default function DevControl() {
       <Title title={"개발자 설정"}/>
       <div className={classes.DevControl}>
         <p>표시할 상태</p>
-        <select defaultValue={"default"} 
+        <select defaultValue={changeWeather} 
         onChange={(e) => {
           setNum(1);
           setChangeWeather(e.target.value)

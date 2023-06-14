@@ -8,14 +8,14 @@ export default function TempNow() {
   const today = new Date();
   let now = today.getHours();
 
-  if(now <10) {
+  if(now <10) {   // 현재 시간을 형식에 맞게 변경
     now = "0" + now + "00"
   }
   else {
     now = now + "00"
   }
 
-  const tempNow = info[1].find((aa) => {
+  const tempNow = info[1].find((aa) => {    // 현재 시간의 기온을 검색
     return aa.category === "TMP" && aa.fcstTime === now
   })
 

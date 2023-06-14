@@ -8,11 +8,11 @@ export default function RainCheck({weather,isRainy}) {
   let todayColor;
 
   let rainyTime;
-  if (isRainy) {
+  if (isRainy) {    // 금일 비가 내린다면 내리는 시간을 저장
     rainyTime = isRainy.fcstTime.replace(/0/g,'')   // 문자열에서 0을 제거하는 정규표현식
   }
   
-  switch (weather) {
+  switch (weather) {    // 날씨에 따라서 style을 변경
     case "normal":
       todayWeather = "비 예보 없음";
       break;

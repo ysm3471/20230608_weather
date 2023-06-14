@@ -8,13 +8,12 @@ export default function Time({weather}) {
 
   const today = new Date();
   let now = today.getHours();
+  if (now < 10) now = "0" + now   // 시간 형식 변경
 
-  if (now < 10) now = "0" + now
-
-  if (weather === 'snow' || !bgToggle) {
+  if (weather === 'snow' || !bgToggle) {    // 배경을 끈 상태거나 weather가 snow일 경우의 style
     time = (
       <div className={`${classes.Time} ${classes.snow}`}>
-      <div className={`icon ${classes.icon}`}>
+      <div className={`icon ${classes.icon}`} onClick={refreshBtn}>
         <img src="img/refresh_b.png" alt="refresh_b" />
       </div>
       <p>기준 시간 {now}:00</p>

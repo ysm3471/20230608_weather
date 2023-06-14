@@ -13,6 +13,7 @@
 .local div {
   width:12px;
   height:11px;
+  cursor: pointer;
 }
 .icons {
   display:flex;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useContext} from 'react';
+import { useContext } from 'react';
 import { styled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -7,11 +7,12 @@ import Switch from '@mui/material/Switch';
 import { WeatherContext } from '../../../Store/WeatherProvider';
 
 const IOSSwitch = styled((props) => {
-  const {bgToggleBtn} = useContext(WeatherContext);
+  const { bgToggleBtn } = useContext(WeatherContext);
 
-  return(
-  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} onChange={bgToggleBtn} />
-)})(({ theme }) => ({
+  return (
+    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} onChange={bgToggleBtn} />
+  )
+})(({ theme }) => ({
   width: 42,
   height: 23,
   padding: 0,
@@ -58,21 +59,19 @@ const IOSSwitch = styled((props) => {
       duration: 500,
     }),
   },
-  chcked:{}
+  chcked: {}
 }));
 
 export default function SwitchBtn() {
-  const {bgToggle} = useContext(WeatherContext);
+  const { bgToggle } = useContext(WeatherContext);
   return (
     <FormGroup>
       {
-        bgToggle ? <FormControlLabel
-        control={<IOSSwitch defaultChecked />}
-      /> :
-      <FormControlLabel
-        control={<IOSSwitch/>}
-      />
-      } 
+        bgToggle ? 
+        <FormControlLabel control={<IOSSwitch defaultChecked />}/> 
+        :
+        <FormControlLabel control={<IOSSwitch />}/>
+      }
       {/* bgToggle의 상태에 따라 switch버튼을 조절 */}
     </FormGroup>
   )
